@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_payu_integration'
-  s.version     = '2.1.6'
+  s.version     = '2.1.7'
   s.summary     = 'Spree integration with PayU.'
   s.description = 'Spree integration with PayU.'
   s.required_ruby_version = '>= 1.9.3'
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.1.6'
+  s.add_dependency 'spree_core', '>= 2.1.6'
   s.add_dependency 'openpayu', '~> 0.1.2'
 
   s.add_development_dependency 'capybara', '~> 2.1'
