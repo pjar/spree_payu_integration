@@ -10,6 +10,15 @@ class PayuOrder
       }
     end
 
+    shipping_rates = order.shipments.last.shipping_rates.where(selected: true)
+    shipping_methods = shipping_rates.map do |sr|
+      {
+        name: sr.shipping_method.name,
+        price: (sr.cost * 100).to_i,
+        country: order.shipping_address.country.iso
+      } 
+    end
+
     description = I18n.t('order_description',
       name: Spree::Config.site_name)
     description = I18n.transliterate(description)
@@ -37,7 +46,8 @@ class PayuOrder
           country_code: order.bill_address.country.iso
         }
       },
-      products: products
+      products: products,
+      shipping_methods: shipping_methods
     }
   end
 end
