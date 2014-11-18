@@ -11,11 +11,11 @@ class PayuOrder
     end
 
     shipping_rates = order.shipments.last.shipping_rates.where(selected: true)
-    shipping_methods = shipping_rates.map do |sr|
+    shipping_costs = shipping_rates.map do |sr|
       {
-        name: sr.shipping_method.name,
-        price: (sr.cost * 100).to_i,
-        country: order.shipping_address.country.iso
+        name: ('Koszty wysyłki: ' + sr.shipping_method.name),
+        unit_price: (sr.cost * 100).to_i,
+        quantity: 1
       } 
     end
 
@@ -46,8 +46,7 @@ class PayuOrder
           country_code: order.bill_address.country.iso
         }
       },
-      products: products,
-      shipping_methods: shipping_methods
+      products: (products + shipping_costs)
     }
   end
 end
